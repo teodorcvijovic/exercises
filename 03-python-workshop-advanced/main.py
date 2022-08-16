@@ -28,13 +28,16 @@ class DotMapWrapper(DotMap):
 class Configuration:
 
     def __init__(self, json_file_name):
-        file = open(json_file_name, 'r')
-        json_string = file.read()
-        file.close()
         try:
+            file = open(json_file_name, 'r')
+            json_string = file.read()
+            file.close()
             self.obj = DotMapWrapper(json.loads(json_string))
         except json.decoder.JSONDecodeError:
             print('error: wrong format')
+            exit(1)
+        except FileNotFoundError:
+            print('error: file does not exists')
             exit(1)
 
     def __getitem__(self, key):
