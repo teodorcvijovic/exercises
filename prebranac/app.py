@@ -4,8 +4,6 @@ from starlette.middleware.cors import CORSMiddleware
 from core.config import settings
 
 # Initialize FastAPI application
-from routers.recipe import recipe_router
-
 app = FastAPI(
     title=settings.PROJECT_NAME,
     openapi_url=f'{settings.API_STR}/openapi.json'
@@ -20,6 +18,3 @@ if settings.CORS_ORIGINS:
         allow_methods=['*'],
         allow_headers=['*'],
     )
-
-# Attach API routers
-app.include_router(recipe_router, prefix=settings.API_STR)
