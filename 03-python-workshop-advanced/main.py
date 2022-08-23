@@ -65,3 +65,5 @@ if __name__ == '__main__':
     print(conf_obj['project.name'].lastname)
     print(conf_obj.project['name'].lastname)
     print(conf_obj.project['name.lastname'])
+    # print(conf_obj['my.test']) # failed
+
