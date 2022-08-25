@@ -24,3 +24,13 @@ class Recipe(Base):
         back_populates='recipes', cascade='all, delete'
     )
 
+    def __repr__(self):
+        ingredient_names = [ingredient.name for ingredient in self.ingredients]
+        recipe_string = f'{self.name}['
+        for i in range(len(ingredient_names)):
+            recipe_string += f'{ingredient_names[i]}'
+            if i < len(ingredient_names) - 1:
+                recipe_string += ', '
+        recipe_string += '] (preparation: ' + self.preparation + ')'
+        return recipe_string
+
