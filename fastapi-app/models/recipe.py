@@ -33,4 +33,3 @@ class Recipe(Base):
                 recipe_string += ', '
         recipe_string += '] (preparation: ' + self.preparation + ')'
         return recipe_string
-
