@@ -10,12 +10,14 @@ from dependencies import get_db
 from services.recipe import service_create_new_recipe, \
     service_get_recipe_by_name, service_get_recipes_with_max_ingredients
 
+from schemas.recipe import Recipe as RecipeSchema, RecipeCreate
+
 router = APIRouter(prefix='/recipe')
 
 
-@router.post('/create')
+@router.post('/create', response_model=RecipeSchema)
 def create_new_recipe(
-        recipe: dict = Body(...), db: Session = Depends(get_db)
+        recipe: RecipeCreate, db: Session = Depends(get_db)
 ) -> Any:
     # recipe - contains name, preparation and dict[ingredient]=quantity
 

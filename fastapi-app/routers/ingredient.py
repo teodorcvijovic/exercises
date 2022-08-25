@@ -8,12 +8,24 @@ from dependencies import get_db
 from services.ingredients import service_create_new_ingredient, \
     service_get_most_used_ingredients
 
+from schemas.ingredient import Ingredient as IngredientSchema, \
+    IngredientCreate
+
 router = APIRouter(prefix='/ingredient')
 
 
-@router.post('/create')
+# @router.post('/create', response_model=IngredientSchema)
+# def create_new_ingredient(
+#         ingredient: dict = Body(...), db: Session = Depends(get_db)
+# ) -> Any:
+#
+#     new_ingredient = service_create_new_ingredient(ingredient, db)
+#
+#     return new_ingredient
+
+@router.post('/create', response_model=IngredientSchema)
 def create_new_ingredient(
-        ingredient: dict = Body(...), db: Session = Depends(get_db)
+        ingredient: IngredientCreate, db: Session = Depends(get_db)
 ) -> Any:
 
     new_ingredient = service_create_new_ingredient(ingredient, db)

@@ -1,25 +1,28 @@
 from sqlalchemy import func
 
+from exceptions import RecipeServerException
 from models import Ingredient, Recipe, recipe_ingredient
 
 
 def service_create_new_recipe(recipe, db):
     ingredients = {}
-    for ingredient_name in recipe['ingredients'].keys():
+    for ingredient_name in recipe.ingredients.keys():
         ingredient = db.query(Ingredient) \
             .filter(Ingredient.name == ingredient_name) \
             .first()
 
         if not ingredient:
-            return {'message': f'Error: Ingredient {ingredient_name} does '
-                               f'not exists.'}
+            raise RecipeServerException(
+                status_code=404,
+                message='Error: Ingredient does not exists.'
+            )
 
-        ingredients[ingredient] = recipe['ingredients'][ingredient_name]
+        ingredients[ingredient] = recipe.ingredients[ingredient_name]
 
     try:
         new_recipe = Recipe(
-            name=recipe['name'],
-            preparation=recipe['preparation'],
+            name=recipe.name,
+            preparation=recipe.preparation,
             # ingredients=[ingredient for ingredient in ingredients.keys()]
         )
 
@@ -36,17 +39,23 @@ def service_create_new_recipe(recipe, db):
 
         db.commit()
 
-        return {'message': f'Recipe {new_recipe.name} successfully created.'}
+        return new_recipe
 
     except KeyError:
-        return {'message': 'Error: Arguments missing'}
+        raise RecipeServerException(
+            status_code=404,
+            message='Error: Arguments missing.'
+        )
 
 
 def service_get_recipe_by_name(recipe_name, db):
     recipe = db.query(Recipe).filter(Recipe.name == recipe_name).first()
 
     if not recipe:
-        return {'message': 'Error: Recipe does not exists.'}
+        raise RecipeServerException(
+            status_code=404,
+            message='Error: Recipe does not exist.'
+        )
     else:
         return str(recipe)
 

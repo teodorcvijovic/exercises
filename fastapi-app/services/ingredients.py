@@ -4,16 +4,18 @@ from models import Ingredient, recipe_ingredient
 
 
 def service_create_new_ingredient(ingredient, db):
-    new_ingredient = Ingredient(name=ingredient['name'])
+    new_ingredient = Ingredient(name=ingredient.name)
 
     db.add(new_ingredient)
     db.commit()
 
-    return ingredient
+    return new_ingredient
 
 
 def service_get_most_used_ingredients(number, db):
-    ingredients = db.query(Ingredient.name, func.count(recipe_ingredient.id)) \
+    ingredients = db.query(Ingredient.name, func.count(
+            recipe_ingredient.id.label('count'))
+        ) \
         .join(
         recipe_ingredient,
         recipe_ingredient.ingredient == Ingredient.id
