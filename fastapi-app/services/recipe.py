@@ -67,27 +67,27 @@ def service_get_recipes_with_max_ingredients(db):
                                      .label('count')
                                      ) \
             .join(
-            recipe_ingredient,
-            recipe_ingredient.recipe == Recipe.id
-        ) \
+                recipe_ingredient,
+                recipe_ingredient.recipe == Recipe.id
+            ) \
             .group_by(Recipe.name) \
             .subquery()
 
         max_ingredient_number = db.query(
-            func.max(ingredients_count.c.count)
-        ) \
+                func.max(ingredients_count.c.count)
+            ) \
             .scalar()
 
         return max_ingredient_number
 
     recipes = db.query(Recipe.name, func.count(recipe_ingredient.id)) \
         .join(
-        recipe_ingredient,
-        recipe_ingredient.recipe == Recipe.id
-    ) \
+            recipe_ingredient,
+            recipe_ingredient.recipe == Recipe.id
+        ) \
         .group_by(Recipe.name) \
         .having(
-        func.count(recipe_ingredient.id) == max_ingredients()
-    )
+            func.count(recipe_ingredient.id) == max_ingredients()
+        )
 
     return recipes

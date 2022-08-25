@@ -2,7 +2,7 @@ from typing import Any
 
 
 from sqlalchemy.orm import Session
-from fastapi import APIRouter, Depends, Body
+from fastapi import APIRouter, Depends
 
 
 from dependencies import get_db

@@ -14,14 +14,14 @@ def service_create_new_ingredient(ingredient, db):
 
 def service_get_most_used_ingredients(number, db):
     ingredients = db.query(Ingredient.name, func.count(
-            recipe_ingredient.id.label('count'))
-        ) \
-        .join(
-        recipe_ingredient,
-        recipe_ingredient.ingredient == Ingredient.id
-    ) \
-        .group_by(Ingredient.name) \
-        .order_by(desc(func.count(recipe_ingredient.id))) \
-        .limit(number)
+                        recipe_ingredient.id.label('count'))
+                    ) \
+                    .join(
+                        recipe_ingredient,
+                        recipe_ingredient.ingredient == Ingredient.id
+                    ) \
+                    .group_by(Ingredient.name) \
+                    .order_by(desc(func.count(recipe_ingredient.id))) \
+                    .limit(number)
 
     return ingredients

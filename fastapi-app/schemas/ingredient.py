@@ -15,5 +15,3 @@ class IngredientCreate(IngredientBase):
 
 class Ingredient(IngredientBase):
     id: UUID
-
-
