@@ -6,6 +6,8 @@ from sqlalchemy.orm import relationship
 
 from db.base_class import Base, UtcNow
 
+from .recipe_ingredient import RecipeIngredient
+
 
 class Ingredient(Base):
     id = Column(
@@ -19,6 +21,6 @@ class Ingredient(Base):
     modified_at = Column(DateTime(timezone=True), onupdate=UtcNow())
 
     recipes = relationship(
-        'Recipe', secondary='recipe_ingredient',
+        'Recipe', secondary=RecipeIngredient.__table__,
         back_populates='ingredients', cascade='all, delete'
     )

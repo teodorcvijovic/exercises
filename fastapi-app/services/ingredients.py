@@ -1,6 +1,6 @@
 from sqlalchemy import func, desc
 
-from models import Ingredient, recipe_ingredient
+from models import Ingredient, RecipeIngredient
 
 
 def service_create_new_ingredient(ingredient, db):
@@ -14,14 +14,14 @@ def service_create_new_ingredient(ingredient, db):
 
 def service_get_most_used_ingredients(number, db):
     ingredients = db.query(Ingredient.name, func.count(
-                        recipe_ingredient.id.label('count'))
+                        RecipeIngredient.id.label('count'))
                     ) \
                     .join(
-                        recipe_ingredient,
-                        recipe_ingredient.ingredient == Ingredient.id
+                        RecipeIngredient,
+        RecipeIngredient.ingredient == Ingredient.id
                     ) \
                     .group_by(Ingredient.name) \
-                    .order_by(desc(func.count(recipe_ingredient.id))) \
+                    .order_by(desc(func.count(RecipeIngredient.id))) \
                     .limit(number)
 
     return ingredients

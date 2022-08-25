@@ -6,7 +6,7 @@ from sqlalchemy import Column, String, DateTime, ForeignKey
 from db.base_class import Base, UtcNow
 
 
-class recipe_ingredient(Base):
+class RecipeIngredient(Base):
     id = Column(
         UUID(as_uuid=True), primary_key=True, unique=True,
         nullable=False, default=uuid.uuid4

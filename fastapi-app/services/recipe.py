@@ -1,7 +1,7 @@
 from sqlalchemy import func
 
 from exceptions import RecipeServerException
-from models import Ingredient, Recipe, recipe_ingredient
+from models import Ingredient, Recipe, RecipeIngredient
 
 
 def service_create_new_recipe(recipe, db):
@@ -30,7 +30,7 @@ def service_create_new_recipe(recipe, db):
         db.commit()
 
         for ingredient in ingredients.keys():
-            new_recipe_ingredient = recipe_ingredient(
+            new_recipe_ingredient = RecipeIngredient(
                 recipe=new_recipe.id,
                 ingredient=ingredient.id,
                 quantity=ingredients[ingredient]
@@ -63,12 +63,12 @@ def service_get_recipe_by_name(recipe_name, db):
 def service_get_recipes_with_max_ingredients(db):
     def max_ingredients():
         ingredients_count = db.query(Recipe.name,
-                                     func.count(recipe_ingredient.id)
+                                     func.count(RecipeIngredient.id)
                                      .label('count')
                                      ) \
             .join(
-                recipe_ingredient,
-                recipe_ingredient.recipe == Recipe.id
+                RecipeIngredient,
+            RecipeIngredient.recipe == Recipe.id
             ) \
             .group_by(Recipe.name) \
             .subquery()
@@ -80,14 +80,14 @@ def service_get_recipes_with_max_ingredients(db):
 
         return max_ingredient_number
 
-    recipes = db.query(Recipe.name, func.count(recipe_ingredient.id)) \
+    recipes = db.query(Recipe.name, func.count(RecipeIngredient.id)) \
         .join(
-            recipe_ingredient,
-            recipe_ingredient.recipe == Recipe.id
+            RecipeIngredient,
+        RecipeIngredient.recipe == Recipe.id
         ) \
         .group_by(Recipe.name) \
         .having(
-            func.count(recipe_ingredient.id) == max_ingredients()
+        func.count(RecipeIngredient.id) == max_ingredients()
         )
 
     return recipes
