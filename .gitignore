@@ -3,3 +3,5 @@
 prebranac/.idea/workspace.xml
 .DS_Store
 *.xml
+.idea
+*__pycache__*
