@@ -8,6 +8,7 @@ from db.base_class import Base, UtcNow
 
 from .recipe_ingredient import RecipeIngredient
 
+
 class Recipe(Base):
     id = Column(
         UUID(as_uuid=True), primary_key=True, unique=True,
