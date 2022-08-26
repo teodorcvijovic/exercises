@@ -1,4 +1,4 @@
-from sqlalchemy.dialects.postgresql import psycopg2
+
 
 from auth.auth_handler import signJWT
 from exceptions import RecipeServerException
