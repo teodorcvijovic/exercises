@@ -11,6 +11,7 @@ from logger import LOG_CONFIG
 
 from routers.recipe import router as recipe_router
 from routers.ingredient import router as ingredient_router
+from routers.authentication import router as authentication_router
 
 # Setup logging configuration
 dictConfig(LOG_CONFIG)
@@ -34,10 +35,11 @@ if settings.CORS_ORIGINS:
 # Attach API routers
 app.include_router(recipe_router, prefix=settings.API_STR)
 app.include_router(ingredient_router, prefix=settings.API_STR)
+app.include_router(authentication_router, prefix=settings.API_STR)
 
 # Add error handlers
 app.add_exception_handler(Exception, generic_error_handler)
 app.add_exception_handler(
     RecipeServerException, recipe_server_exception_handler
 )
-app.add_exception_handler(StarletteException, recipe_server_exception_handler)
+# app.add_exception_handler(StarletteException, recipe_server_exception_handler)

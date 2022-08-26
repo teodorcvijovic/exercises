@@ -1,6 +1,6 @@
 """recipe_ingredient_class_name_changed
 
-Revision ID: 9e66f8ed0974
+Revision ID: 003
 Revises: 002
 Create Date: 2022-08-25 21:10:56.659357
 
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 from sqlalchemy.dialects import postgresql
 
 # revision identifiers, used by Alembic.
-revision = '9e66f8ed0974'
+revision = '003'
 down_revision = '002'
 branch_labels = None
 depends_on = None
