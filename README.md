@@ -7,51 +7,51 @@ Object of this task is to create a simple web service for Food recipes. It shoul
 
 Entities needed:
 
-Recipe
+     Recipe
 
-Ingredients
+     Ingredients
 
 Basic features:
 
-Recipe creation
+     Recipe creation
 
-List all recipes
+     List all recipes
 
-Get recipes by name
+     Get recipes by name
 
-Get most used ingredients (top 5)
+     Get most used ingredients (top 5)
 
 Requirements:
 
-Recipe should have name, recipe text, and ingredients
+     Recipe should have name, recipe text, and ingredients
 
-Ingredients should have a name
+     Ingredients should have a name
 
-Solution should be posted on any source control (pref Git)
+     Solution should be posted on any source control (pref Git)
 
-Write unit and API tests
+     Write unit and API tests
 
 Bonus:
 
-Search recipes (name, text, ingredients)
+     Search recipes (name, text, ingredients)
 
-Filter recipes with minimum and maximum number of ingredients
+     Filter recipes with minimum and maximum number of ingredients
 
  
 
 Additional:
-Add User entity:
+     Add User entity:
 
-User should have at least email, first and last name
+     User should have at least email, first and last name
 
 Requirements:
 
-User registration
+     User registration
 
-User login
+     User login
 
-Recipe rating (you cannot rate your own recipes)(Rating is a number between 1 and 5)
+     Recipe rating (you cannot rate your own recipes)(Rating is a number between 1 and 5)
 
-List own recipes
+     List own recipes
 
-Use JWT or any available tool for auth
+     Use JWT or any available tool for auth
