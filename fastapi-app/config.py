@@ -28,11 +28,17 @@ class Settings(BaseSettings):
     POSTGRES_PORT: str = os.getenv('POSTGRES_PORT', '5432')
     POSTGRES_DB: str = os.getenv('POSTGRES_DB')
 
+    DB_URL: str = os.getenv('DB_URL')
+
     # end
 
+    # SQLALCHEMY_DATABASE_URL = (
+    #     f'postgresql://{POSTGRES_USER}:{POSTGRES_PASSWORD}'
+    #     f'@{POSTGRES_SERVER}:{POSTGRES_PORT}/{POSTGRES_DB}'
+    # )
     SQLALCHEMY_DATABASE_URL = (
         f'postgresql://{POSTGRES_USER}:{POSTGRES_PASSWORD}'
-        f'@{POSTGRES_SERVER}:{POSTGRES_PORT}/{POSTGRES_DB}'
+        f'@{DB_URL}/{POSTGRES_DB}'
     )
 
 
