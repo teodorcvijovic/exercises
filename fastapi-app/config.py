@@ -30,6 +30,9 @@ class Settings(BaseSettings):
 
     DB_URL: str = os.getenv('DB_URL')
 
+    GOOGLE_CLIENT_ID = os.getenv('GOOGLE_CLIENT_ID') or None
+    GOOGLE_CLIENT_SECRET = os.getenv('GOOGLE_CLIENT_SECRET') or None
+
     # end
 
     # SQLALCHEMY_DATABASE_URL = (
